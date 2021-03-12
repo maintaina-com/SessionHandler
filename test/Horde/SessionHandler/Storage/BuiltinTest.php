@@ -115,7 +115,7 @@ class Horde_SessionHandler_Storage_BuiltinTest extends Horde_SessionHandler_Stor
         session_write_close();
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         session_cache_limiter('');
@@ -124,7 +124,7 @@ class Horde_SessionHandler_Storage_BuiltinTest extends Horde_SessionHandler_Stor
         self::$handler = new Horde_SessionHandler_Storage_Builtin(array('path' => self::$dir));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (isset($this->probability)) {
             ini_set('session.gc_probability', $this->probability);
@@ -136,7 +136,7 @@ class Horde_SessionHandler_Storage_BuiltinTest extends Horde_SessionHandler_Stor
     /**
      * @todo Rely on session_status() in H6.
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
         unset($_SESSION);

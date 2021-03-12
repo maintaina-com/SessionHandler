@@ -68,12 +68,12 @@ class Horde_SessionHandler_Storage_Base extends Horde_Test_Case
                             self::$handler->getSessionIDs());
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$dir = Horde_Util::createTempDir();
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::$handler = null;
     }
