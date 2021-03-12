@@ -2,6 +2,9 @@
 /**
  * Prepare the test setup.
  */
+namespace Horde\SessionHandler\Storage\Sql;
+use Horde_SessionHandler_Storage_Sql_Base as Base;
+
 require_once dirname(__FILE__) . '/Base.php';
 
 /**
@@ -13,7 +16,7 @@ require_once dirname(__FILE__) . '/Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_SessionHandler_Storage_Sql_MysqliTest extends Horde_SessionHandler_Storage_Sql_Base
+class MysqliTest extends Base
 {
     public static function setUpBeforeClass(): void
     {

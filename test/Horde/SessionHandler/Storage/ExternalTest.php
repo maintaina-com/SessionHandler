@@ -2,6 +2,11 @@
 /**
  * Prepare the test setup.
  */
+namespace Horde\SessionHandler\Storage;
+use Horde_SessionHandler_Storage_Base as Base;
+use \Horde_SessionHandler_Storage_File;
+use \Horde_SessionHandler_Storage_External;
+
 require_once dirname(__FILE__) . '/Base.php';
 
 /**
@@ -13,7 +18,7 @@ require_once dirname(__FILE__) . '/Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_SessionHandler_Storage_ExternalTest extends Horde_SessionHandler_Storage_Base
+class ExternalTest extends Base
 {
     public function testWrite()
     {

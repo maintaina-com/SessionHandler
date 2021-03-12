@@ -2,6 +2,10 @@
 /**
  * Prepare the test setup.
  */
+namespace Horde\SessionHandler\Storage;
+use Horde_SessionHandler_Storage_Base as Base;
+use \Horde_SessionHandler_Storage_Builtin;
+
 require_once dirname(__FILE__) . '/Base.php';
 
 /**
@@ -13,7 +17,7 @@ require_once dirname(__FILE__) . '/Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_SessionHandler_Storage_BuiltinTest extends Horde_SessionHandler_Storage_Base
+class BuiltinTest extends Base
 {
     /**
      * @runInSeparateProcess
@@ -118,9 +122,11 @@ class Horde_SessionHandler_Storage_BuiltinTest extends Horde_SessionHandler_Stor
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
-        session_cache_limiter('');
-        ini_set('session.use_cookies', 0);
-        ini_set('session.save_path', self::$dir);
+        if (!headers_sent()) {
+            session_cache_limiter('');
+            ini_set('session.use_cookies', 0);
+            ini_set('session.save_path', self::$dir);
+        }
         self::$handler = new Horde_SessionHandler_Storage_Builtin(array('path' => self::$dir));
     }
 
@@ -146,7 +152,9 @@ class Horde_SessionHandler_Storage_BuiltinTest extends Horde_SessionHandler_Stor
              session_id())) {
             session_destroy();
         }
-        session_name(ini_get('session.name'));
+        if (!headers_sent()) {
+            session_name(ini_get('session.name'));
+        }
     }
 
 }

@@ -2,6 +2,10 @@
 /**
  * Prepare the test setup.
  */
+namespace Horde\SessionHandler\Storage\Sql\Pdo;
+use Horde_SessionHandler_Storage_Sql_Base as Base;
+use \PDO;
+
 require_once dirname(__FILE__) . '/../Base.php';
 
 /**
@@ -13,7 +17,7 @@ require_once dirname(__FILE__) . '/../Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_SessionHandler_Storage_Sql_Pdo_MysqlTest extends Horde_SessionHandler_Storage_Sql_Base
+class MysqlTest extends Base
 {
     public static function setUpBeforeClass(): void
     {
