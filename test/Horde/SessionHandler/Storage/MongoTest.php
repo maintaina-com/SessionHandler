@@ -3,9 +3,6 @@
  * Prepare the test setup.
  */
 namespace Horde\SessionHandler\Storage;
-use Horde_SessionHandler_Storage_Base as Base;
-
-require_once dirname(__FILE__) . '/Base.php';
 
 /**
  * Copyright 2016-2017 Horde LLC (http://www.horde.org/)
@@ -16,7 +13,7 @@ require_once dirname(__FILE__) . '/Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class MongoTest extends Base
+class MongoTest extends BaseTestCase
 {
     protected static $reason;
     protected static $mongo;

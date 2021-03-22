@@ -3,10 +3,7 @@
  * Prepare the test setup.
  */
 namespace Horde\SessionHandler\Storage;
-use Horde_SessionHandler_Storage_Base as Base;
 use \Horde_SessionHandler_Storage_Builtin;
-
-require_once dirname(__FILE__) . '/Base.php';
 
 /**
  * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
@@ -17,7 +14,7 @@ require_once dirname(__FILE__) . '/Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class BuiltinTest extends Base
+class BuiltinTest extends BaseTestCase
 {
     /**
      * @runInSeparateProcess
@@ -106,7 +103,7 @@ class BuiltinTest extends Base
         session_name('sessionname');
         session_start();
         $this->assertEquals(array(),
-                            self::$handler->getSessionIDs());
+                            self::$handler->getSessionIDs());        
     }
 
     protected function _write()
