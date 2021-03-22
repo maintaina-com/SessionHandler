@@ -5,6 +5,8 @@
 namespace Horde\SessionHandler\Storage\Sql\Pdo;
 use Horde\SessionHandler\Storage\Sql\SqlBaseTestCase;
 use \Horde_Test_Factory_Db;
+use \Horde_Log_Logger;
+use \Horde_Log_Handler_Cli;
 
 /**
  * Copyright 2012-2017 Horde LLC (http://www.horde.org/)

@@ -4,6 +4,10 @@
  */
 namespace Horde\SessionHandler\Storage\Sql;
 use Horde\SessionHandler\Storage\BaseTestCase;
+use \Horde_Log_Logger;
+use \Horde_Log_Handler_Cli;
+use \Horde_Db_Migration_Migrator;
+use \Horde_SessionHandler_Storage_Sql;
 
 /**
  * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
