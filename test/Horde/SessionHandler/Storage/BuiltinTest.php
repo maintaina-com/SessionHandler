@@ -103,7 +103,7 @@ class BuiltinTest extends BaseTestCase
         session_name('sessionname');
         session_start();
         $this->assertEquals(array(),
-                            self::$handler->getSessionIDs());        
+                            self::$handler->getSessionIDs());
     }
 
     protected function _write()
