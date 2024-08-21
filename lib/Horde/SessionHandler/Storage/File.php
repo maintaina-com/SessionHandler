@@ -64,9 +64,11 @@ class Horde_SessionHandler_Storage_File extends Horde_SessionHandler_Storage
      *
      * @param string $id  The session ID.
      */
-    protected function _open($id)
+    protected function _open(string $id)
     {
         if (!empty($this->_fp)) {
+            return;
+        } elseif (preg_match('/^[A-Za-z0-9,-]{22,256}$/', $id) !== 1) {
             return;
         }
 
@@ -79,8 +81,9 @@ class Horde_SessionHandler_Storage_File extends Horde_SessionHandler_Storage
     }
 
     /**
+     * @return bool
      */
-    public function close()
+    public function close(): bool
     {
         if (!empty($this->_fp)) {
             flock($this->_fp, LOCK_UN);
@@ -113,7 +116,7 @@ class Horde_SessionHandler_Storage_File extends Horde_SessionHandler_Storage
 
     /**
      */
-    public function write($id, $session_data)
+    public function write($id, $session_data): bool
     {
         $this->_open($id);
 
@@ -129,14 +132,22 @@ class Horde_SessionHandler_Storage_File extends Horde_SessionHandler_Storage
     }
 
     /**
+     * @param string $id
+     * @return bool
      */
-    public function destroy($id)
+    public function destroy($id): bool
     {
         $this->close();
 
-        $filename = $this->_params['path'] . '/' . self::PREFIX . $id;
+        if (preg_match('/^[A-Za-z0-9,-]{22,256}$/', $id) !== 1) {
+            return false;
+        }
 
-        return @unlink($filename);
+        $filename = realpath($this->_params['path'] . '/' . self::PREFIX . $id);
+        if ($filename && (strpos($filename, $this->_params["path"]) == 0)) {
+            return @unlink($filename);
+        }
+        return false;
     }
 
     /**
