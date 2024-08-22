@@ -68,7 +68,7 @@ class Horde_SessionHandler_Storage_File extends Horde_SessionHandler_Storage
     {
         if (!empty($this->_fp)) {
             return;
-        } elseif (preg_match('/^[A-Za-z0-9,-]{22,256}$/', $id) !== 1) {
+        } elseif (!$this->isValidSessionID($id)) {
             return;
         }
 
@@ -139,15 +139,13 @@ class Horde_SessionHandler_Storage_File extends Horde_SessionHandler_Storage
     {
         $this->close();
 
-        if (preg_match('/^[A-Za-z0-9,-]{22,256}$/', $id) !== 1) {
+        if (!$this->isValidSessionID($id)) {
             return false;
         }
 
-        $filename = realpath($this->_params['path'] . '/' . self::PREFIX . $id);
-        if ($filename && (strpos($filename, $this->_params["path"]) == 0)) {
-            return @unlink($filename);
-        }
-        return false;
+        $filename = $this->_params['path'] . '/' . self::PREFIX . $id;
+
+        return @unlink($filename);
     }
 
     /**
